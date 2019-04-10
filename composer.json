@@ -1,0 +1,49 @@
+{
+    "name": "nicoaudy/laravelmanthra",
+    "description": "Laravel Manthra For Lazy Developer",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "NicoAudy",
+            "email": "nicoaudy1994@gmail.com",
+            "homepage": "https://nicoaudy.github.io"
+        }
+    ],
+    "homepage": "https://github.com/nicoaudy/laravelmanthra",
+    "keywords": [
+        "Laravel", 
+        "LaravelManthra",
+        "crud",
+        "crud generator",
+        "laravel crud generator"
+    ],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NicoAudy\\LaravelManthra\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NicoAudy\\LaravelManthra\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NicoAudy\\LaravelManthra\\LaravelManthraServiceProvider"
+            ],
+            "aliases": {
+                "LaravelManthra": "NicoAudy\\LaravelManthra\\Facades\\LaravelManthra"
+            }
+        }
+    }
+}
