@@ -36,7 +36,7 @@ $ php artisan vendor:publish
 
 
 ```
-php artisan manthra:generate Posts --fields="title#string; content#text; category#select#options=technology,tips,health" --view-path=admin --controller-namespace=Admin --route-group=admin
+php artisan manthra:all Posts --fields="title#string; content#text; category#select#options=technology,tips,health" --view-path=admin --controller-namespace=Admin --route-group=admin
 ```
 
 Options:
