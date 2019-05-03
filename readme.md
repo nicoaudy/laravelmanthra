@@ -34,29 +34,36 @@ $ php artisan vendor:publish
 
 #### Crud command:
 
+Now you will be prompted two types of controller, API and Standard after executing the php artisan manthra command. 
 
+If you pick API, your command should look like this (without --view-path=path): 
+```
+php artisan manthra:all Posts --fields="title#string; content#text; category#select#options=technology,tips,health" --controller-namespace=Admin --route-group=admin --model-namespace=Models
+```
+
+And this command to generate standard version :
 ```
 php artisan manthra:all Posts --fields="title#string; content#text; category#select#options=technology,tips,health" --view-path=admin --controller-namespace=Admin --route-group=admin --model-namespace=Models
 ```
 
 Options:
 
-| Option    | Description |
-| ---       | ---     |
-| `--fields` | Fields name for the form & migration. e.g. ```--fields="title#string; content#text; category#select#options=technology,tips,health; user_id#integer#unsigned"``` |
-| `--route` | Include Crud route to routes.php? yes or no |
-| `--pk` | The name of the primary key |
-| `--view-path` | The name of the view path |
-| `--controller-namespace` | The namespace of the controller - sub directories will be created |
-| `--model-namespace` | The namespace that the model will be placed in - directories will be created |
-| `--route-group` | Prefix of the route group |
-| `--pagination` | The amount of models per page for index pages |
-| `--indexes` | The fields to add an index to. append "#unique" to a field name to add a unique index. Create composite fields by separating fieldnames with a pipe (``` --indexes="title,field1|field2#unique" ``` will create normal index on title, and unique composite on fld1 and fld2) |
-| `--foreign-keys` | Any foreign keys for the table. e.g. ```--foreign-keys="user_id#id#users#cascade"``` where user_id is the column name, id is the name of the field on the foreign table, users is the name of the foreign table, and cascade is the operation 'ON DELETE' together with 'ON UPDATE' |
-| `--validations` | Validation rules for the form "col_name#rules_set" e.g. ``` "title#min:10|max:30|required" ``` - See https://laravel.com/docs/master/validation#available-validation-rules |
-| `--relationships` | The relationships for the model. e.g. ```--relationships="comments#hasMany#App\Comment"``` in the format |
-| `--localize` | Allow to localize. e.g. localize=yes  |
-| `--locales`  | Locales language type. e.g. locals=en |
+| Option                   | Description                                                                                                                                                                                                                                                                         |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--fields`               | Fields name for the form & migration. e.g. ```--fields="title#string; content#text; category#select#options=technology,tips,health; user_id#integer#unsigned"```                                                                                                                    |
+| `--route`                | Include Crud route to routes.php? yes or no                                                                                                                                                                                                                                         |
+| `--pk`                   | The name of the primary key                                                                                                                                                                                                                                                         |
+| `--view-path`            | The name of the view path                                                                                                                                                                                                                                                           |
+| `--controller-namespace` | The namespace of the controller - sub directories will be created                                                                                                                                                                                                                   |
+| `--model-namespace`      | The namespace that the model will be placed in - directories will be created                                                                                                                                                                                                        |
+| `--route-group`          | Prefix of the route group                                                                                                                                                                                                                                                           |
+| `--pagination`           | The amount of models per page for index pages                                                                                                                                                                                                                                       |
+| `--indexes`              | The fields to add an index to. append "#unique" to a field name to add a unique index. Create composite fields by separating fieldnames with a pipe (``` --indexes="title,field1|field2#unique" ``` will create normal index on title, and unique composite on fld1 and fld2)       |
+| `--foreign-keys`         | Any foreign keys for the table. e.g. ```--foreign-keys="user_id#id#users#cascade"``` where user_id is the column name, id is the name of the field on the foreign table, users is the name of the foreign table, and cascade is the operation 'ON DELETE' together with 'ON UPDATE' |
+| `--validations`          | Validation rules for the form "col_name#rules_set" e.g. ``` "title#min:10|max:30|required" ``` - See https://laravel.com/docs/master/validation#available-validation-rules                                                                                                          |
+| `--relationships`        | The relationships for the model. e.g. ```--relationships="comments#hasMany#App\Comment"``` in the format                                                                                                                                                                            |
+| `--localize`             | Allow to localize. e.g. localize=yes                                                                                                                                                                                                                                                |
+| `--locales`              | Locales language type. e.g. locals=en                                                                                                                                                                                                                                               |
 
 -----------
 
@@ -65,23 +72,30 @@ Options:
 
 For controller:
 
+- Standard Version
 ```
 php artisan manthra:controller PostsController --crud-name=posts --model-name=Post --view-path="directory" --route-group=admin
 ```
+
+- API Version
+```
+php artisan manthra:api-controller PostsController --crud-name=posts --model-name=Post --route-group=admin
+```
+
 Controller's Options:
 
-| Option    | Description |
-| ---       | ---     |
-| `--crud-name` | The name of the crud. e.g. ```--crud-name="post"``` |
-| `--model-name` | The name of the model. e.g. ```--model-name="Post"``` |
-| `--model-namespace` | The namespace of the model. e.g. ```--model-namespace="Custom\Namespace\Post"``` |
-| `--controller-namespace` | The namespace of the controller. e.g. ```--controller-namespace="Http\Controllers\Client"``` |
-| `--view-path` | The name of the view path |
-| `--fields` | Fields name for the form & migration. e.g. ```--fields="title#string; content#text; category#select#options=technology,tips,health; user_id#integer#unsigned"``` |
-| `--validations` | Validation rules for the form "col_name#rules_set" e.g. ``` "title#min:10|max:30|required" ``` - See https://laravel.com/docs/master/validation#available-validation-rules |
-| `--route-group` | Prefix of the route group |
-| `--pagination` | The amount of models per page for index pages |
-| `--force` | Overwrite already existing controller. |
+| Option                   | Description                                                                                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--crud-name`            | The name of the crud. e.g. ```--crud-name="post"```                                                                                                                        |
+| `--model-name`           | The name of the model. e.g. ```--model-name="Post"```                                                                                                                      |
+| `--model-namespace`      | The namespace of the model. e.g. ```--model-namespace="Custom\Namespace\Post"```                                                                                           |
+| `--controller-namespace` | The namespace of the controller. e.g. ```--controller-namespace="Http\Controllers\Client"```                                                                               |
+| `--view-path`            | The name of the view path                                                                                                                                                  |
+| `--fields`               | Fields name for the form & migration. e.g. ```--fields="title#string; content#text; category#select#options=technology,tips,health; user_id#integer#unsigned"```           |
+| `--validations`          | Validation rules for the form "col_name#rules_set" e.g. ``` "title#min:10|max:30|required" ``` - See https://laravel.com/docs/master/validation#available-validation-rules |
+| `--route-group`          | Prefix of the route group                                                                                                                                                  |
+| `--pagination`           | The amount of models per page for index pages                                                                                                                              |
+| `--force`                | Overwrite already existing controller.                                                                                                                                     |
 
 For model:
 
