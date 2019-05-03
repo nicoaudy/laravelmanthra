@@ -1,0 +1,107 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyRootNamespaceHttp\Controllers\Controller;
+
+use DummyRootNamespace{{modelNamespace}}{{modelName}};
+use Illuminate\Http\Request;
+
+class DummyClass extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return json response
+     */
+    public function index(Request $request)
+    {
+        $keyword = $request->get('search');
+        $perPage = {{pagination}};
+
+        if (!empty($keyword)) {
+            ${{crudName}} = {{modelName}}::{{whereSnippet}}paginate($perPage);
+        } else {
+            ${{crudName}} = {{modelName}}::paginate($perPage);
+        }
+
+        return response()->json([
+            'message' => true,
+            'data' => ${{crudName}}
+        ]);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return json response
+     */
+    public function store(Request $request)
+    {
+        {{validationRules}}
+        $requestData = $request->all();
+        {{fileSnippet}}
+        {{modelName}}::create($requestData);
+
+        return response()->json([
+            'message' => 'data has been saved',
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     *
+     * @return json response
+     */
+    public function show($id)
+    {
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+
+        return response()->json([
+            'message' => true,
+            'data' => ${{crudNameSingular}}
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return json response
+     */
+    public function update($id, Request $request)
+    {
+        {{validationRules}}
+        $requestData = $request->all();
+        {{fileSnippet}}
+        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+        ${{crudNameSingular}}->update($requestData);
+
+        return response()->json([
+            'message' => 'data has been updated',
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     *
+     * @return json response
+     */
+    public function destroy($id)
+    {
+        {{modelName}}::destroy($id);
+
+        return response()->json([
+            'message' => 'data has been updated',
+        ]);
+    }
+}

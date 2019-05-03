@@ -14,6 +14,7 @@ class GenerateCrudCommand extends Command
      */
     protected $signature = 'manthra:all
                             {name : The name of the Crud.}
+                            {--api= : Default will be false meaning generate standard controller, if true will generate API format.}
                             {--fields= : Fields name for the form & migration.}
                             {--validations= : Validation details for the fields.}
                             {--controller-namespace= : Namespace of the controller.}
@@ -55,6 +56,7 @@ class GenerateCrudCommand extends Command
     public function handle()
     {
         $name = $this->argument('name');
+        $api = ($this->option('api')) == true ? true : false;
         $modelName = str_singular($name);
         $migrationName = str_plural(snake_case($name));
         $tableName = $migrationName;
@@ -81,7 +83,11 @@ class GenerateCrudCommand extends Command
         $relationships = $this->option('relationships');
         $validations = trim($this->option('validations'));
 
-        $this->call('manthra:controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--model-name' => $modelName, '--model-namespace' => $modelNamespace, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--pagination' => $perPage, '--fields' => $fields, '--validations' => $validations]);
+        if ($api === true) {
+            $this->call('manthra:api-controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--model-name' => $modelName, '--model-namespace' => $modelNamespace, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--pagination' => $perPage, '--fields' => $fields, '--validations' => $validations]);
+        } else {
+            $this->call('manthra:controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--model-name' => $modelName, '--model-namespace' => $modelNamespace, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--pagination' => $perPage, '--fields' => $fields, '--validations' => $validations]);
+        }
         $this->call('manthra:model', ['name' => $modelNamespace . $modelName, '--fillable' => $fillable, '--table' => $tableName, '--pk' => $primaryKey, '--relationships' => $relationships]);
         $this->call('manthra:migration', ['name' => $migrationName, '--schema' => $fields, '--pk' => $primaryKey, '--indexes' => $indexes, '--foreign-keys' => $foreignKeys]);
         $this->call('manthra:view', ['name' => $name, '--fields' => $fields, '--validations' => $validations, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--localize' => $localize, '--pk' => $primaryKey]);
@@ -92,7 +98,11 @@ class GenerateCrudCommand extends Command
         //$this->callSilent('optimize');
 
         // Updating the Http/routes.php file
-        $routeFile = base_path('routes/web.php');
+        if ($api === true) {
+            $routeFile = base_path('routes/api.php');
+        } else {
+            $routeFile = base_path('routes/web.php');
+        }
         if (file_exists($routeFile) && (strtolower($this->option('route')) === 'yes')) {
             $this->controller = ($controllerNamespace != '') ? $controllerNamespace . '\\' . $name . 'Controller' : $name . 'Controller';
             $isAdded = File::append($routeFile, "\n" . implode("\n", $this->addRoutes()));

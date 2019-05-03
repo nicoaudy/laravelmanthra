@@ -32,7 +32,7 @@ class LaravelManthraServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/laravelmanthra.php', 'laravelmanthra');
+        $this->mergeConfigFrom(__DIR__ . '/../config/laravelmanthra.php', 'laravelmanthra');
 
         $this->app->singleton('laravelmanthra', function ($app) {
             return new LaravelManthra;
@@ -48,7 +48,7 @@ class LaravelManthraServiceProvider extends ServiceProvider
     {
         return ['laravelmanthra'];
     }
-    
+
     /**
      * Console-specific booting.
      *
@@ -57,7 +57,7 @@ class LaravelManthraServiceProvider extends ServiceProvider
     protected function bootForConsole()
     {
         $this->publishes([
-            __DIR__.'/../config/laravelmanthra.php' => config_path('laravelmanthra.php'),
+            __DIR__ . '/../config/laravelmanthra.php' => config_path('laravelmanthra.php'),
         ], 'laravelmanthra.config');
 
         $this->publishes([
@@ -67,6 +67,7 @@ class LaravelManthraServiceProvider extends ServiceProvider
         $this->commands([
             'NicoAudy\LaravelManthra\Commands\GenerateCrudCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateControllerCommand',
+            'NicoAudy\LaravelManthra\Commands\GenerateApiControllerCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateModelCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateMigrationCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateViewCommand',
