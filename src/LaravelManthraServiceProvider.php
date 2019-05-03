@@ -64,6 +64,10 @@ class LaravelManthraServiceProvider extends ServiceProvider
             __DIR__ . '/stubs/' => base_path('resources/manthra/stubs/'),
         ]);
 
+        $this->publishes([
+            __DIR__ . '/ApiController.php' => app_path('Http/Controllers/ApiController.php'),
+        ], 'laravel-manthra ApiController');
+
         $this->commands([
             'NicoAudy\LaravelManthra\Commands\GenerateCrudCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateControllerCommand',

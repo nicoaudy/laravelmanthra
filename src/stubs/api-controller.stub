@@ -2,12 +2,12 @@
 
 namespace DummyNamespace;
 
-use DummyRootNamespaceHttp\Controllers\Controller;
+use DummyRootNamespaceHttp\Controllers\ApiController;
 
 use DummyRootNamespace{{modelNamespace}}{{modelName}};
 use Illuminate\Http\Request;
 
-class DummyClass extends Controller
+class DummyClass extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -25,10 +25,7 @@ class DummyClass extends Controller
             ${{crudName}} = {{modelName}}::paginate($perPage);
         }
 
-        return response()->json([
-            'message' => true,
-            'data' => ${{crudName}}
-        ]);
+        return $this->makeResponse(${{crudName}});
     }
 
 
@@ -46,9 +43,7 @@ class DummyClass extends Controller
         {{fileSnippet}}
         {{modelName}}::create($requestData);
 
-        return response()->json([
-            'message' => 'data has been saved',
-        ]);
+        return $this->respondCreated();
     }
 
     /**
@@ -60,12 +55,8 @@ class DummyClass extends Controller
      */
     public function show($id)
     {
-        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
-
-        return response()->json([
-            'message' => true,
-            'data' => ${{crudNameSingular}}
-        ]);
+        ${{crudNameSingular}} = {{modelName}}::find($id);
+		return ${{crudNameSingular}} ? $this->makeResponse(${{crudNameSingular}}) : $this->respondNotFound();
     }
 
     /**
@@ -81,12 +72,13 @@ class DummyClass extends Controller
         {{validationRules}}
         $requestData = $request->all();
         {{fileSnippet}}
-        ${{crudNameSingular}} = {{modelName}}::findOrFail($id);
+        ${{crudNameSingular}} = {{modelName}}::find($id);
+        
+        if(!${{crudNameSingular}}) return $this->respondNotFound();
+        
         ${{crudNameSingular}}->update($requestData);
 
-        return response()->json([
-            'message' => 'data has been updated',
-        ]);
+        return $this->makeResponse(null, 'data has been updated successfuly');
     }
 
     /**
@@ -98,10 +90,11 @@ class DummyClass extends Controller
      */
     public function destroy($id)
     {
-        {{modelName}}::destroy($id);
-
-        return response()->json([
-            'message' => 'data has been updated',
-        ]);
+        ${{crudNameSingular}} = {{modelName}}::find($id);
+        if(!${{crudNameSingular}}) return $this->respondNotFound();
+        
+        ${{crudNameSingular}}->delete();
+        
+        return $this->makeResponse(null, 'data has been deleted successfuly');
     }
 }

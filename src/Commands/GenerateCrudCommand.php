@@ -14,7 +14,6 @@ class GenerateCrudCommand extends Command
      */
     protected $signature = 'manthra:all
                             {name : The name of the Crud.}
-                            {--api= : Default will be false meaning generate standard controller, if true will generate API format.}
                             {--fields= : Fields name for the form & migration.}
                             {--validations= : Validation details for the fields.}
                             {--controller-namespace= : Namespace of the controller.}
@@ -55,8 +54,10 @@ class GenerateCrudCommand extends Command
      */
     public function handle()
     {
+        $defaultIndex = 0;
+        $type = $this->choice('Which type do you want to generate ?', ['Standard', 'API'], $defaultIndex);
+
         $name = $this->argument('name');
-        $api = ($this->option('api')) == true ? true : false;
         $modelName = str_singular($name);
         $migrationName = str_plural(snake_case($name));
         $tableName = $migrationName;
@@ -83,14 +84,33 @@ class GenerateCrudCommand extends Command
         $relationships = $this->option('relationships');
         $validations = trim($this->option('validations'));
 
-        if ($api === true) {
-            $this->call('manthra:api-controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--model-name' => $modelName, '--model-namespace' => $modelNamespace, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--pagination' => $perPage, '--fields' => $fields, '--validations' => $validations]);
+        if ($type == 'API') {
+            $this->call('manthra:api-controller', [
+                'name' => $controllerNamespace . $name . 'Controller',
+                '--crud-name' => $name,
+                '--model-name' => $modelName,
+                '--model-namespace' => $modelNamespace,
+                '--route-group' => $routeGroup,
+                '--pagination' => $perPage,
+                '--fields' => $fields,
+                '--validations' => $validations
+            ]);
         } else {
-            $this->call('manthra:controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--model-name' => $modelName, '--model-namespace' => $modelNamespace, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--pagination' => $perPage, '--fields' => $fields, '--validations' => $validations]);
+            $this->call('manthra:controller', [
+                'name' => $controllerNamespace . $name . 'Controller',
+                '--crud-name' => $name,
+                '--model-name' => $modelName,
+                '--model-namespace' => $modelNamespace,
+                '--view-path' => $viewPath,
+                '--route-group' => $routeGroup,
+                '--pagination' => $perPage,
+                '--fields' => $fields,
+                '--validations' => $validations
+            ]);
+            $this->call('manthra:view', ['name' => $name, '--fields' => $fields, '--validations' => $validations, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--localize' => $localize, '--pk' => $primaryKey]);
         }
         $this->call('manthra:model', ['name' => $modelNamespace . $modelName, '--fillable' => $fillable, '--table' => $tableName, '--pk' => $primaryKey, '--relationships' => $relationships]);
         $this->call('manthra:migration', ['name' => $migrationName, '--schema' => $fields, '--pk' => $primaryKey, '--indexes' => $indexes, '--foreign-keys' => $foreignKeys]);
-        $this->call('manthra:view', ['name' => $name, '--fields' => $fields, '--validations' => $validations, '--view-path' => $viewPath, '--route-group' => $routeGroup, '--localize' => $localize, '--pk' => $primaryKey]);
         if ($localize == 'yes') {
             $this->call('manthra:lang', ['name' => $name, '--fields' => $fields, '--locales' => $locales]);
         }
@@ -98,7 +118,7 @@ class GenerateCrudCommand extends Command
         //$this->callSilent('optimize');
 
         // Updating the Http/routes.php file
-        if ($api === true) {
+        if ($type == 'API') {
             $routeFile = base_path('routes/api.php');
         } else {
             $routeFile = base_path('routes/web.php');
