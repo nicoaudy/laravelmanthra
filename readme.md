@@ -191,11 +191,12 @@ You can customize the generator's stub files/templates to achieve your need.
 
 4. On **config/laravelmanthra.php** you can add new stubs and choose which values are passed
 
+## Support
+<a href="https://www.buymeacoffee.com/sAb9PGzxT" target="_blank"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.
-
 
 ## Contributing
 
