@@ -14,7 +14,15 @@ class ManthraController extends Controller
 
      public function store()
      {
-          dd(Artisan::call('manthra:all ' . request('model_name'), []));
-          return 'Store controller';
+          $modelName = request('model');
+          $fields = request('fields');
+
+          dd();
+
+          // $implode = implode('#', $fields);
+
+          Artisan::call("manthra:all $modelName", [
+               '--fields' => ''
+          ]);
      }
 }
