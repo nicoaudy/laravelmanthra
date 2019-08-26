@@ -10,4 +10,9 @@ class ManthraController extends Controller
      {
           return 'Hello from manthra controller';
      }
+
+     public function store()
+     {
+          return 'Store controller';
+     }
 }
