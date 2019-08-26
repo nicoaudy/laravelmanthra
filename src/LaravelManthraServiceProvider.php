@@ -23,6 +23,7 @@ class LaravelManthraServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
     }
 
     /**
