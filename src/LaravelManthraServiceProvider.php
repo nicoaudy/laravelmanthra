@@ -20,10 +20,10 @@ class LaravelManthraServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            $this->bootForConsole();
-        }
+        $this->bootForConsole();
+
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        $this->loadViewsFrom(__DIR__ . '/./../resources/views', 'manthra');
     }
 
     /**
