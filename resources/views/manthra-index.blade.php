@@ -27,7 +27,7 @@
                                                                  style="color:red">*</sup></label>
                                                        <div class="control">
                                                             <input class="input" type="text" v-model="model"
-                                                                 placeholder="eg: Post">
+                                                                 placeholder="eg: Post" required>
                                                        </div>
                                                   </div>
                                              </div>
@@ -57,7 +57,7 @@
                                                        <div class="column">
                                                             <div class="control">
                                                                  <input class="input" type="text" v-model="field.name"
-                                                                      placeholder="Field Name">
+                                                                      placeholder="Field Name" required>
                                                             </div>
                                                        </div>
                                                        <div class="column">
@@ -238,7 +238,11 @@
                          }, 1000)
                     } catch (error) {
                          this.loading = false
-                         alert(error)
+                         this.$toasted.show("whoops looks like something went wrong, please check your input. 🔥🔥🔥", {
+                              theme: "outline", 
+                              position: "top-right", 
+                              duration : 5000
+                         });
                     }
                }
           }
