@@ -19,6 +19,7 @@ class ManthraController extends Controller
           Artisan::call("manthra:all", [
                'name' => request('model'),
                '--fields' => $fields,
+               '--validations' => '',
                '--controller-namespace' => request('controller_namespace'),
                '--model-namespace' => request('model_namespace'),
                '--view-path' => request('view_path'),

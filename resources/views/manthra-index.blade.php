@@ -141,10 +141,19 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://unpkg.com/vue-toasted"></script>
 <script>
      Vue.config.devtools = true
+     Vue.use(Toasted)
      new Vue({
           el: '#manthra',
+          mounted() {
+               this.$toasted.show("🧛Just write what you want, and let manthra do the rest 🔥🤙", { 
+                    theme: "outline", 
+                    position: "top-right", 
+                    duration : 3000
+               });
+          },
           data: {
                welcome: 'Laravel Manthra',
                loading: false,
@@ -189,8 +198,22 @@
                removeFields(i) {
                     this.fields.splice(i, 1)
                },
+               resetForm() {
+                    this.model = ''
+                    this.fields = [{name: '', type: 'string'}]
+                    this.controller_namespace = ''
+                    this.model_namespace = ''
+                    this.view_path = ''
+                    this.route_group = ''
+               },
                async handleSubmit(){
                     this.loading = true
+
+                    this.$toasted.show("Manthra is working... 🧛‍🧛‍", { 
+                         theme: "bubble", 
+                         position: "top-right", 
+                         duration : 3000
+                    });
 
                     try {
                          let data = {}
@@ -203,9 +226,16 @@
 
                          const response = await axios.post('/manthra', data)
                          const result = await response
-                         console.log(result)
 
-                         this.loading = false
+                         setTimeout(() => {
+                              this.resetForm()
+                              this.loading = false
+                              this.$toasted.show("Manthra success generated 🤙☕", {
+                                   theme: "outline", 
+                                   position: "top-right", 
+                                   duration : 3000
+                              });
+                         }, 1000)
                     } catch (error) {
                          this.loading = false
                          alert(error)
