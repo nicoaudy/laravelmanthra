@@ -14,15 +14,25 @@ class ManthraController extends Controller
 
      public function store()
      {
-          $modelName = request('model');
-          $fields = request('fields');
+          $fields = $this->merge_fields(request('fields'));
 
-          dd();
-
-          // $implode = implode('#', $fields);
-
-          Artisan::call("manthra:all $modelName", [
-               '--fields' => ''
+          Artisan::call("manthra:all", [
+               'name' => request('model'),
+               '--fields' => $fields,
+               '--controller-namespace' => request('controller_namespace'),
+               '--model-namespace' => request('model_namespace'),
+               '--view-path' => request('view_path'),
+               '--route-group' => request('group_group')
           ]);
+     }
+
+     private function merge_fields(array $fields): string
+     {
+          $merge = '';
+          foreach ($fields as $field) {
+               $merge .= $field['name'] . '#' . $field['type'] . ';';
+          }
+
+          return $merge;
      }
 }

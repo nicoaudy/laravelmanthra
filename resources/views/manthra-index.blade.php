@@ -1,116 +1,139 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 ​
 <div id="manthra">
-
      <form action="#" @submit.prevent="handleSubmit">
           <div class="container">
-               <div class="columns box">
-                    <div class="column"></div>
-                    <div class="column is-four-fifths ">
-                         <div class="columns">
-                              <div class="column">
-                                   <center>@{{ welcome }}</center>
-                              </div>
-                         </div>
-                         <div class="columns">
-                              <div class="column">
-                                   <div class="field">
-                                        <label class="label">Model Name<sup style="color:red">*</sup></label>
-                                        <div class="control">
-                                             <input class="input" type="text" v-model="model" placeholder="eg: Post">
-                                        </div>
-                                   </div>
-                              </div>
-                              <div class="column">
-                                   <div class="field">
-                                        <label class="label">Model Namespace</label>
-                                        <div class="control">
-                                             <input class="input" type="text" v-model="model_namespace"
-                                                  placeholder="eg: Models">
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-                         <div class="columns">
-                              <div class="column">
-                                   <label class="label">Fields<sup style="color:red">*</sup></label>
-                              </div>
-                              <div class="column">
-                                   <div class="field is-right" style="float: right">
-                                        <a class="button is-link" @click="addMoreFields">Add Field</a>
-                                   </div>
-                              </div>
-                         </div>
-                         <div class="columns" v-for="(field, i) in fields">
-                              <div class="column">
-                                   <div class="columns">
-                                        <div class="column">
-                                             <div class="control">
-                                                  <input class="input" type="text" v-model="field.name"
-                                                       placeholder="Field Name">
+               <div class="card">
+                    <header class="card-header">
+                         <p class="card-header-title">
+                              @{{ welcome }}
+                         </p>
+                         <a href="#" class="card-header-icon" aria-label="more options">
+                              <span class="icon">
+                                   <i class="fas fa-angle-down" aria-hidden="true"></i>
+                              </span>
+                         </a>
+                    </header>
+
+                    <div class="card-content">
+                         <div class="content">
+                              <div class="columns">
+                                   <div class="column"></div>
+                                   <div class="column is-four-fifths">
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <div class="field">
+                                                       <label class="label">Model Name<sup
+                                                                 style="color:red">*</sup></label>
+                                                       <div class="control">
+                                                            <input class="input" type="text" v-model="model"
+                                                                 placeholder="eg: Post">
+                                                       </div>
+                                                  </div>
                                              </div>
-                                        </div>
-                                        <div class="column">
-                                             <div class="control">
-                                                  <div class="select is-primary">
-                                                       <select v-model="field.type">
-                                                            <option :value="type" v-for="type in types">@{{ type }}
-                                                            </option>
-                                                       </select>
+                                             <div class="column">
+                                                  <div class="field">
+                                                       <label class="label">Model Namespace</label>
+                                                       <div class="control">
+                                                            <input class="input" type="text" v-model="model_namespace"
+                                                                 placeholder="eg: Models">
+                                                       </div>
                                                   </div>
                                              </div>
                                         </div>
-                                        <div class="column">
-                                             <div class="control">
-                                                  <a class="button is-danger" @click="removeFields(i)">X</a>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <label class="label">Fields<sup style="color:red">*</sup></label>
+                                             </div>
+                                             <div class="column">
+                                                  <div class="field is-right" style="float: right">
+                                                       <a class="button is-link" @click="addMoreFields">Add Field</a>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="columns" v-for="(field, i) in fields">
+                                             <div class="column">
+                                                  <div class="columns">
+                                                       <div class="column">
+                                                            <div class="control">
+                                                                 <input class="input" type="text" v-model="field.name"
+                                                                      placeholder="Field Name">
+                                                            </div>
+                                                       </div>
+                                                       <div class="column">
+                                                            <div class="control">
+                                                                 <div class="select is-primary">
+                                                                      <select v-model="field.type">
+                                                                           <option :value="type" v-for="type in types">
+                                                                                @{{ type }}
+                                                                           </option>
+                                                                      </select>
+                                                                 </div>
+                                                            </div>
+                                                       </div>
+                                                       <div class="column">
+                                                            <div class="control">
+                                                                 <a class="button is-danger"
+                                                                      @click="removeFields(i)">X</a>
+                                                            </div>
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <div class="field">
+                                                       <label class="label">Controller Namespace</label>
+                                                       <div class="control">
+                                                            <input class="input" type="text"
+                                                                 v-model="controller_namespace" placeholder="eg: Admin">
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <div class="field">
+                                                       <label class="label">View Path</label>
+                                                       <div class="control">
+                                                            <input class="input" type="text" v-model="view_path"
+                                                                 placeholder="eg: admin">
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <div class="field">
+                                                       <label class="label">Route Group</label>
+                                                       <div class="control">
+                                                            <input class="input" type="text" v-model="route_group"
+                                                                 placeholder="eg: admin">
+                                                       </div>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <div class="field">
+                                                       <button class="button is-primary" type="submit"
+                                                            :class="loading ? 'is-loading' : null">Generate</button>
+                                                  </div>
                                              </div>
                                         </div>
                                    </div>
-                              </div>
-                         </div>
-                         <div class="columns">
-                              <div class="column">
-                                   <div class="field">
-                                        <label class="label">Controller Namespace</label>
-                                        <div class="control">
-                                             <input class="input" type="text" v-model="controller_namespace"
-                                                  placeholder="eg: Admin">
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-                         <div class="columns">
-                              <div class="column">
-                                   <div class="field">
-                                        <label class="label">View Path</label>
-                                        <div class="control">
-                                             <input class="input" type="text" v-model="view_path"
-                                                  placeholder="eg: admin">
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-                         <div class="columns">
-                              <div class="column">
-                                   <div class="field">
-                                        <label class="label">Route Group</label>
-                                        <div class="control">
-                                             <input class="input" type="text" v-model="route_group"
-                                                  placeholder="eg: admin">
-                                        </div>
-                                   </div>
-                              </div>
-                         </div>
-                         <div class="columns">
-                              <div class="column">
-                                   <div class="field">
-                                        <button class="button is-primary" type="submit"
-                                             :class="loading ? 'is-loading' : null">Generate</button>
-                                   </div>
+                                   <div class="column"></div>
                               </div>
                          </div>
                     </div>
-                    <div class="column"></div>
+                    <footer class="card-footer">
+                         <div class="card-footer-item">
+                              <h3>
+                                   Made with ❤️
+                                   <a href="https://github.com/nicoaudy" target="_blank">🔥 NicoAudy</a>
+                              </h3>
+                         </div>
+                    </footer>
                </div>
           </div>
      </form>
@@ -123,7 +146,7 @@
      new Vue({
           el: '#manthra',
           data: {
-               welcome: 'Manthra',
+               welcome: 'Laravel Manthra',
                loading: false,
                types: [
                     'string',
@@ -181,6 +204,8 @@
                          const response = await axios.post('/manthra', data)
                          const result = await response
                          console.log(result)
+
+                         this.loading = false
                     } catch (error) {
                          this.loading = false
                          alert(error)
