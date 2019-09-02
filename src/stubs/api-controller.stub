@@ -19,11 +19,7 @@ class DummyClass extends ApiController
         $keyword = $request->get('search');
         $perPage = {{pagination}};
 
-        if (!empty($keyword)) {
-            ${{crudName}} = {{modelName}}::{{whereSnippet}}paginate($perPage);
-        } else {
-            ${{crudName}} = {{modelName}}::paginate($perPage);
-        }
+        ${{crudName}} = {{modelName}}::{{whereSnippet}}->paginate($perPage);
 
         return $this->makeResponse(${{crudName}});
     }

@@ -137,7 +137,7 @@ EOD;
         $whereSnippet = '';
 
         if ($fields) {
-            $x = 0;
+            $lastElement = end($fieldsArray);
             foreach ($fieldsArray as $index => $item) {
                 $itemArray = explode('#', $item);
 
@@ -147,11 +147,17 @@ EOD;
 
                 $fieldName = trim($itemArray[0]);
 
-                $whereSnippet .= ($index == 0) ? "where('$fieldName', 'LIKE', \"%\$keyword%\")" . "\n\t\t\t\t" : "->orWhere('$fieldName', 'LIKE', \"%\$keyword%\")" . "\n\t\t\t\t";
-            }
+                $where = "where('$fieldName', 'LIKE', \"%\$keyword%\")" . "\n\t\t\t\t";
+                $orWhere = $lastElement == $item ? "->orWhere('$fieldName', 'LIKE', \"%\$keyword%\")" . ";" : "->orWhere('$fieldName', 'LIKE', \"%\$keyword%\")" . "\n\t\t\t\t";
 
-            $whereSnippet .= "->";
+                $whereSnippet .= ($index == 0) ? $where : $orWhere;
+            }
         }
+
+        $whenWrapper = 'when($keyword, function($query) use($keyword) {
+            $query->' . $whereSnippet . '
+        })';
+
 
         return $this->replaceNamespace($stub, $name)
             ->replaceCrudName($stub, $crudName)
@@ -165,7 +171,7 @@ EOD;
             ->replaceValidationRules($stub, $validationRules)
             ->replacePaginationNumber($stub, $perPage)
             ->replaceFileSnippet($stub, $fileSnippet)
-            ->replaceWhereSnippet($stub, $whereSnippet)
+            ->replaceWhereSnippet($stub, $whenWrapper)
             ->replaceClass($stub, $name);
     }
 
