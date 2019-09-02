@@ -39,10 +39,12 @@ class GenerateWebCommand extends Command
         $modelName = str_singular($name);
         $migrationName = str_plural(snake_case($name));
         $tableName = $migrationName;
+
         $routeGroup = $this->option('route-group');
         $this->routeName = ($routeGroup) ? $routeGroup . '/' . snake_case($name, '-') : snake_case($name, '-');
         $perPage = intval($this->option('pagination'));
         $controllerNamespace = ($this->option('controller-namespace')) ? $this->option('controller-namespace') . '\\' : '';
+
         $modelNamespace = ($this->option('model-namespace')) ? trim($this->option('model-namespace')) . '\\' : '';
         $fields = rtrim($this->option('fields'), ';');
         $primaryKey = $this->option('pk');
@@ -60,6 +62,7 @@ class GenerateWebCommand extends Command
         $locales = $this->option('locales');
         $indexes = $this->option('indexes');
         $relationships = $this->option('relationships');
+
         $validations = trim($this->option('validations'));
 
         $this->call('manthra:controller', [

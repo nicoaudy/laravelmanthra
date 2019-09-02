@@ -39,10 +39,12 @@ class GenerateCrudCommand extends Command
         $modelName = str_singular($name);
         $migrationName = str_plural(snake_case($name));
         $tableName = $migrationName;
+
         $routeGroup = $this->option('route-group');
         $this->routeName = ($routeGroup) ? $routeGroup . '/' . snake_case($name, '-') : snake_case($name, '-');
         $perPage = intval($this->option('pagination'));
         $controllerNamespace = ($this->option('controller-namespace')) ? $this->option('controller-namespace') . '\\' : '';
+
         $modelNamespace = ($this->option('model-namespace')) ? trim($this->option('model-namespace')) . '\\' : '';
         $fields = rtrim($this->option('fields'), ';');
         $primaryKey = $this->option('pk');
@@ -115,8 +117,8 @@ class GenerateCrudCommand extends Command
             $this->call('manthra:lang', ['name' => $name, '--fields' => $fields, '--locales' => $locales]);
         }
 
-        $webRoute = base_path('routes/api.php');
-        $apiRoute = base_path('routes/web.php');
+        $webRoute = base_path('routes/web.php');
+        $apiRoute = base_path('routes/api.php');
 
         if (file_exists($webRoute) && file_exists($apiRoute) && (strtolower($this->option('route')) === 'yes')) {
             $this->controller = ($controllerNamespace != '') ? $controllerNamespace . '\\' . $name . 'Controller' : $name . 'Controller';
@@ -126,6 +128,7 @@ class GenerateCrudCommand extends Command
 
             if ($isAddedToWeb && $isAddedToApi) {
                 $this->info('Manthra working... Route added to ' . $webRoute);
+                $this->info('Manthra working... Route added to ' . $apiRoute);
             } else {
                 $this->info('Ups.. Your Manthra is wrong, Unable to add the route to ' . $apiRoute);
             }
