@@ -21,11 +21,7 @@ class DummyClass extends Controller
         $keyword = $request->get('search');
         $perPage = {{pagination}};
 
-        if (!empty($keyword)) {
-            ${{crudName}} = {{modelName}}::{{whereSnippet}}paginate($perPage);
-        } else {
-            ${{crudName}} = {{modelName}}::paginate($perPage);
-        }
+        ${{crudName}} = {{modelName}}::{{whereSnippet}}->paginate($perPage);
 
         return view('{{viewPath}}{{viewName}}.index', compact('{{crudName}}'));
     }

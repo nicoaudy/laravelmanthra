@@ -147,7 +147,7 @@ EOD;
 
                 $fieldName = trim($itemArray[0]);
 
-                $where = "where('$fieldName', 'LIKE', \"%\$keyword%\")" . "\n\t\t\t\t";
+                $where = $lastElement == $item ? "where('$fieldName', 'LIKE', \"%\$keyword%\")" . ";" : "where('$fieldName', 'LIKE', \"%\$keyword%\")" . "\n\t\t\t\t";
                 $orWhere = $lastElement == $item ? "->orWhere('$fieldName', 'LIKE', \"%\$keyword%\")" . ";" : "->orWhere('$fieldName', 'LIKE', \"%\$keyword%\")" . "\n\t\t\t\t";
 
                 $whereSnippet .= ($index == 0) ? $where : $orWhere;
