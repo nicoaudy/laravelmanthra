@@ -71,6 +71,9 @@ class LaravelManthraServiceProvider extends ServiceProvider
 
         $this->commands([
             'NicoAudy\LaravelManthra\Commands\GenerateCrudCommand',
+            'NicoAudy\LaravelManthra\Commands\GenerateApiCommand',
+            'NicoAudy\LaravelManthra\Commands\GenerateWebCommand',
+
             'NicoAudy\LaravelManthra\Commands\GenerateControllerCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateApiControllerCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateModelCommand',

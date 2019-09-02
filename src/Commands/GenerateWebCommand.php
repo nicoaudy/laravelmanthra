@@ -5,9 +5,9 @@ namespace NicoAudy\LaravelManthra\Commands;
 use File;
 use Illuminate\Console\Command;
 
-class GenerateCrudCommand extends Command
+class GenerateWebCommand extends Command
 {
-    protected $signature = 'manthra:complete
+    protected $signature = 'manthra:web
                             {name : The name of the Crud.}
                             {--fields= : Fields name for the form & migration.}
                             {--validations= : Validation details for the fields.}
@@ -24,7 +24,7 @@ class GenerateCrudCommand extends Command
                             {--localize=no : Allow to localize? yes|no.}
                             {--locales=en : Locales language type.}';
 
-    protected $description = 'Generate Crud complete including web and api controller, model, views & migrations.';
+    protected $description = 'Generate Crud Web including controller, model, views & migrations.';
     protected $routeName = '';
     protected $controller = '';
 
@@ -61,17 +61,6 @@ class GenerateCrudCommand extends Command
         $indexes = $this->option('indexes');
         $relationships = $this->option('relationships');
         $validations = trim($this->option('validations'));
-
-        $this->call('manthra:api-controller', [
-            'name' => $controllerNamespace . $name . 'Controller',
-            '--crud-name' => $name,
-            '--model-name' => $modelName,
-            '--model-namespace' => $modelNamespace,
-            '--route-group' => $routeGroup,
-            '--pagination' => $perPage,
-            '--fields' => $fields,
-            '--validations' => $validations
-        ]);
 
         $this->call('manthra:controller', [
             'name' => $controllerNamespace . $name . 'Controller',
@@ -115,19 +104,14 @@ class GenerateCrudCommand extends Command
             $this->call('manthra:lang', ['name' => $name, '--fields' => $fields, '--locales' => $locales]);
         }
 
-        $webRoute = base_path('routes/api.php');
-        $apiRoute = base_path('routes/web.php');
-
-        if (file_exists($webRoute) && file_exists($apiRoute) && (strtolower($this->option('route')) === 'yes')) {
+        $routeFile = base_path('routes/web.php');
+        if (file_exists($routeFile) && (strtolower($this->option('route')) === 'yes')) {
             $this->controller = ($controllerNamespace != '') ? $controllerNamespace . '\\' . $name . 'Controller' : $name . 'Controller';
-
-            $isAddedToWeb = File::append($webRoute, "\n" . implode("\n", $this->addRoutes()));
-            $isAddedToApi = File::append($apiRoute, "\n" . implode("\n", $this->addRoutes()));
-
-            if ($isAddedToWeb && $isAddedToApi) {
-                $this->info('Manthra working... Route added to ' . $webRoute);
+            $isAdded = File::append($routeFile, "\n" . implode("\n", $this->addRoutes()));
+            if ($isAdded) {
+                $this->info('Manthra working... Route added to ' . $routeFile);
             } else {
-                $this->info('Ups.. Your Manthra is wrong, Unable to add the route to ' . $apiRoute);
+                $this->info('Ups.. Your Manthra is wrong, Unable to add the route to ' . $routeFile);
             }
         }
     }
