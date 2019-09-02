@@ -124,7 +124,7 @@ class GenerateCrudCommand extends Command
             $this->controller = ($controllerNamespace != '') ? $controllerNamespace . '\\' . $name . 'Controller' : $name . 'Controller';
 
             $isAddedToWeb = File::append($webRoute, "\n" . implode("\n", $this->addRoutes()));
-            $isAddedToApi = File::append($apiRoute, "\n" . implode("\n", $this->addRoutes()));
+            $isAddedToApi = File::append($apiRoute, "\n" . implode("\n", $this->addApiRoutes()));
 
             if ($isAddedToWeb && $isAddedToApi) {
                 $this->info('Manthra working... Route added to ' . $webRoute);
@@ -138,5 +138,11 @@ class GenerateCrudCommand extends Command
     protected function addRoutes()
     {
         return ["Route::resource('" . $this->routeName . "', '" . $this->controller . "');"];
+    }
+
+    protected function addApiRoutes()
+    {
+        $path = "Api\\";
+        return ["Route::resource('" . $this->routeName . "', '" . $path . $this->controller . "');"];
     }
 }
