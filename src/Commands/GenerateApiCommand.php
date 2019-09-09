@@ -75,18 +75,18 @@ class GenerateApiCommand extends Command
         ]);
 
         $this->call('manthra:model', [
-            'name' => $modelNamespace . $modelName, 
-            '--fillable' => $fillable, 
-            '--table' => $tableName, 
-            '--pk' => $primaryKey, 
+            'name' => $modelNamespace . $modelName,
+            '--fillable' => $fillable,
+            '--table' => $tableName,
+            '--pk' => $primaryKey,
             '--relationships' => $relationships
         ]);
 
         $this->call('manthra:migration', [
-            'name' => $migrationName, 
-            '--schema' => $fields, 
-            '--pk' => $primaryKey, 
-            '--indexes' => $indexes, 
+            'name' => $migrationName,
+            '--schema' => $fields,
+            '--pk' => $primaryKey,
+            '--indexes' => $indexes,
             '--foreign-keys' => $foreignKeys
         ]);
 
@@ -109,6 +109,7 @@ class GenerateApiCommand extends Command
 
     protected function addRoutes()
     {
-        return ["Route::resource('" . $this->routeName . "', '" . $this->controller . "');"];
+        $path = "Api\\";
+        return ["Route::resource('" . $this->routeName . "', '" . $path . $this->controller . "');"];
     }
 }

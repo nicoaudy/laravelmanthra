@@ -32,19 +32,31 @@ $ php artisan vendor:publish
 
 ## Commands
 
-#### Crud command:
+### Complete (web and api)
 
-Now you will be prompted two types of controller, API and Standard after executing the php artisan manthra command. 
+Generate crud scaffold web and api you may use this command, for example :
 
-If you pick API, your command should look like this (without --view-path=path): 
-```
-php artisan manthra:all Posts --fields="title#string; content#text; category#select#options=technology,tips,health" --controller-namespace=Admin --route-group=admin --model-namespace=Models
+```bash
+php artisan manthra:complete Cat --fields="name#string;age#integer; type#select#options=persian,maine coon,bengal" --view-path=pet --controller-namespace=Pet --route-group=pet --model-namespace=Models
 ```
 
-And this command to generate standard version :
+### Web 
+
+Generate crud scaffold web only you may use this command, for example :
+
+```bash
+php artisan manthra:web Cat --fields="name#string;age#integer; type#select#options=persian,maine coon,bengal" --view-path=pet --controller-namespace=Pet --route-group=pet --model-namespace=Models
 ```
-php artisan manthra:all Posts --fields="title#string; content#text; category#select#options=technology,tips,health" --view-path=admin --controller-namespace=Admin --route-group=admin --model-namespace=Models
+
+### Api 
+
+Generate crud scaffold api only you may use this command, the difference between web and api just `(--view-path=)` flag, for example :
+
+```bash
+php artisan manthra:api Cat --fields="name#string;age#integer; type#select#options=persian,maine coon,bengal" --controller-namespace=Pet --route-group=pet --model-namespace=Models
 ```
+
+---
 
 Options:
 
