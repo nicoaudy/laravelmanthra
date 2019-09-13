@@ -43,6 +43,15 @@
                                         </div>
                                         <div class="columns">
                                              <div class="column">
+                                                  <label class="label">What type do you want to generate</label>
+
+                                                  <input type="checkbox" v-model="generate_type" value="web"> Web
+                                                  <br>
+                                                  <input type="checkbox" v-model="generate_type" value="api"> Api
+                                             </div>
+                                        </div>
+                                        <div class="columns">
+                                             <div class="column">
                                                   <label class="label">Fields<sup style="color:red">*</sup></label>
                                              </div>
                                              <div class="column">
@@ -182,6 +191,7 @@
                ],
 
                model: '',
+               generate_type: ['web'],
                fields: [{name: '', type: 'string'}],
                controller_namespace: '',
                model_namespace: '',
@@ -223,6 +233,7 @@
                          data['model_namespace'] = this.model_namespace
                          data['view_path'] = this.view_path
                          data['route_group'] = this.route_group
+                         data['generate_type'] = this.generate_type
 
                          const response = await axios.post('/manthra', data)
                          const result = await response
