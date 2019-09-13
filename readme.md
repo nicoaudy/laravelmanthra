@@ -29,6 +29,20 @@ Publish vendor files of this package.
 $ php artisan vendor:publish
 ```
 
+## Generator GUI
+
+If you want to generate using gui, manthra will provide you with generator gui you can view in `/manthra`.
+
+You can modified your `/manthra` to append middleware with forcing default route to your custom route.
+
+```php
+    // manthra controller
+    $manthraNamespace = 'NicoAudy\LaravelManthra\Http\Controllers\ManthraController@index';
+    
+    // your custom route
+    Route::get('/manthra', $manthraNamespace)->middleware('auth');
+```
+
 
 ## Commands
 
