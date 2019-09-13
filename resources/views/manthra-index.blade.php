@@ -43,11 +43,15 @@
                                         </div>
                                         <div class="columns">
                                              <div class="column">
-                                                  <label class="label">What type do you want to generate</label>
+                                                  <label class="label">What type do you want to generate
+                                                       <sup style="color:red">*</sup>
+                                                  </label>
 
-                                                  <input type="checkbox" v-model="generate_type" value="web"> Web
+                                                  <input type="checkbox" v-model="generate_type" value="web">
+                                                  Web
                                                   <br>
-                                                  <input type="checkbox" v-model="generate_type" value="api"> Api
+                                                  <input type="checkbox" v-model="generate_type" value="api">
+                                                  Api
                                              </div>
                                         </div>
                                         <div class="columns">
