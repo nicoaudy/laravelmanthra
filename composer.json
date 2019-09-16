@@ -11,14 +11,14 @@
     ],
     "homepage": "https://github.com/nicoaudy/laravelmanthra",
     "keywords": [
-        "Laravel", 
+        "Laravel",
         "LaravelManthra",
         "crud",
         "crud generator",
         "laravel crud generator"
     ],
     "require": {
-        "illuminate/support": "~5"
+        "php" : "^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0",
