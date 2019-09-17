@@ -18,7 +18,8 @@
         "laravel crud generator"
     ],
     "require": {
-        "php" : "^7.0"
+        "php" : "^7.0",
+        "laravel/helpers": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0",
