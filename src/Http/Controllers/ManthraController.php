@@ -54,7 +54,7 @@ class ManthraController extends Controller
      {
           $merge = '';
           foreach ($fields as $field) {
-               $merge .= $field['name'] . '#' . $field['type'] . ';';
+               $merge .= $field['name'] . '#' . $field['type'] . ($field['nullable'] ? '#nullable' : null) . ';';
           }
 
           return $merge;
