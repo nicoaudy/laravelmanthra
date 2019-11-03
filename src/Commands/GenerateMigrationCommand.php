@@ -70,8 +70,8 @@ class GenerateMigrationCommand extends GeneratorCommand
     protected function getStub()
     {
         return config('laravelmanthra.custom_template')
-        ? config('laravelmanthra.path') . '/migration.stub'
-        : __DIR__ . '/../stubs/migration.stub';
+            ? config('laravelmanthra.path') . '/migration.stub'
+            : __DIR__ . '/../stubs/migration.stub';
     }
 
     /**
@@ -191,21 +191,20 @@ class GenerateMigrationCommand extends GeneratorCommand
             // --foreign-keys="foreign_entity_id#id#foreign_entity#onDelete#onUpdate"
             if (count($parts) == 3) {
                 $schemaFields .= "\$table->foreign('" . trim($parts[0]) . "')"
-                . "->references('" . trim($parts[1]) . "')->on('" . trim($parts[2]) . "')";
+                    . "->references('" . trim($parts[1]) . "')->on('" . trim($parts[2]) . "')";
             } elseif (count($parts) == 4) {
                 $schemaFields .= "\$table->foreign('" . trim($parts[0]) . "')"
-                . "->references('" . trim($parts[1]) . "')->on('" . trim($parts[2]) . "')"
-                . "->onDelete('" . trim($parts[3]) . "')" . "->onUpdate('" . trim($parts[3]) . "')";
+                    . "->references('" . trim($parts[1]) . "')->on('" . trim($parts[2]) . "')"
+                    . "->onDelete('" . trim($parts[3]) . "')" . "->onUpdate('" . trim($parts[3]) . "')";
             } elseif (count($parts) == 5) {
                 $schemaFields .= "\$table->foreign('" . trim($parts[0]) . "')"
-                . "->references('" . trim($parts[1]) . "')->on('" . trim($parts[2]) . "')"
-                . "->onDelete('" . trim($parts[3]) . "')" . "->onUpdate('" . trim($parts[4]) . "')";
+                    . "->references('" . trim($parts[1]) . "')->on('" . trim($parts[2]) . "')"
+                    . "->onDelete('" . trim($parts[3]) . "')" . "->onUpdate('" . trim($parts[4]) . "')";
             } else {
                 continue;
             }
 
             $schemaFields .= ";\n" . $tabIndent . $tabIndent . $tabIndent;
-
         }
 
         $primaryKey = $this->option('pk');
@@ -234,7 +233,9 @@ class GenerateMigrationCommand extends GeneratorCommand
     protected function replaceSchemaUp(&$stub, $schemaUp)
     {
         $stub = str_replace(
-            '{{schema_up}}', $schemaUp, $stub
+            '{{schema_up}}',
+            $schemaUp,
+            $stub
         );
 
         return $this;
@@ -251,7 +252,9 @@ class GenerateMigrationCommand extends GeneratorCommand
     protected function replaceSchemaDown(&$stub, $schemaDown)
     {
         $stub = str_replace(
-            '{{schema_down}}', $schemaDown, $stub
+            '{{schema_down}}',
+            $schemaDown,
+            $stub
         );
 
         return $this;
