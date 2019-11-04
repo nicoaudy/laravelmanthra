@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="columns">
                                              <div class="column">
-                                                  <label class="label">Fields<sup style="color:red">*</sup></label>
+                                                  <label class="label">Fields (Draggable)<sup style="color:red">*</sup></label>
                                              </div>
                                              <div class="column">
                                                   <div class="field is-right" style="float: right">
@@ -61,19 +61,13 @@
                                                   </div>
                                              </div>
                                         </div>
-                                        <div class="columns">
-                                             <table>
-                                                  <tr>
-                                                       <th>FIELD NAME</th>
-                                                       <th>TYPE</th>
-                                                       <th>NULLABLE</th>
-                                                       <th>#</th>
-                                                  </tr>
-                                                  <tr v-for="(field, i) in fields">
-                                                       <td>
+                                        <draggable v-model="fields">
+                                             <transition-group>
+                                                  <div class="columns" v-for="(field, i) in fields" :key="i">
+                                                       <div class="column">
                                                             <input class="input" type="text" v-model="field.name" placeholder="Field Name" required>
-                                                       </td>
-                                                       <td>
+                                                       </div>
+                                                       <div class="column">
                                                             <div class="select is-primary">
                                                                  <select v-model="field.type">
                                                                       <option :value="type" v-for="type in types">
@@ -81,16 +75,16 @@
                                                                       </option>
                                                                  </select>
                                                             </div>
-                                                       </td>
-                                                       <td>
-                                                            <input type="checkbox" v-model="field.nullable">
-                                                       </td>
-                                                       <td>
+                                                       </div>
+                                                       <div class="column">
+                                                            <input type="checkbox" v-model="field.nullable"> nullable
+                                                       </div>
+                                                       <div class="column">
                                                             <a class="button is-danger" @click="removeFields(i)">X</a>
-                                                       </td>
-                                                  </tr>
-                                             </table>
-                                        </div>
+                                                       </div>
+                                                  </div>
+                                             </transition-group>
+                                        </draggable>
                                         <div class="columns">
                                              <div class="column">
                                                   <div class="field">
@@ -149,9 +143,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="https://unpkg.com/vue-toasted"></script>
+<script src="//cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
 <script>
      Vue.config.devtools = true
      Vue.use(Toasted)
+     Vue.use(vuedraggable)
      new Vue({
           el: '#manthra',
           mounted() {
