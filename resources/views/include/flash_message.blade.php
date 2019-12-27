@@ -7,19 +7,19 @@
     var timeout = "{{ config('laravelmanthra.clear_message') }}"
     switch(type){
         case 'info':
-            toastr.info("{{ Session::get('message') }}");
+            toastr.info("{{ Session::get('message') }}", {timeOut: timeout});
             break;
 
         case 'warning':
-            toastr.warning("{{ Session::get('message') }}");
+            toastr.warning("{{ Session::get('message') }}", {timeOut: timeout});
             break;
 
         case 'success':
-            toastr.success("{{ Session::get('message') }}");
+            toastr.success("{{ Session::get('message') }}", {timeOut: timeout});
             break;
 
         case 'error':
-            toastr.error("{{ Session::get('message') }}");
+            toastr.error("{{ Session::get('message') }}", {timeOut: timeout});
             break;
     }
   @endif
