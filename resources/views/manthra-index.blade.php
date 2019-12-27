@@ -40,53 +40,6 @@
                                         </div>
                                         <div class="columns">
                                              <div class="column">
-                                                  <label class="label">What type do you want to generate
-                                                       <sup style="color:red">*</sup>
-                                                  </label>
-
-                                                  <input type="checkbox" v-model="generate_type" value="web">
-                                                  Web
-                                                  <br>
-                                                  <input type="checkbox" v-model="generate_type" value="api">
-                                                  Api
-                                             </div>
-                                        </div>
-                                        <div class="columns">
-                                             <div class="column">
-                                                  <label class="label">Fields (Draggable)<sup style="color:red">*</sup></label>
-                                             </div>
-                                             <div class="column">
-                                                  <div class="field is-right" style="float: right">
-                                                       <a class="button is-link" @click="addMoreFields">Add Field</a>
-                                                  </div>
-                                             </div>
-                                        </div>
-                                        <draggable v-model="fields">
-                                             <transition-group>
-                                                  <div class="columns" v-for="(field, i) in fields" :key="i">
-                                                       <div class="column">
-                                                            <input class="input" type="text" v-model="field.name" placeholder="Field Name" required>
-                                                       </div>
-                                                       <div class="column">
-                                                            <div class="select is-primary">
-                                                                 <select v-model="field.type">
-                                                                      <option :value="type" v-for="type in types">
-                                                                           @{{ type }}
-                                                                      </option>
-                                                                 </select>
-                                                            </div>
-                                                       </div>
-                                                       <div class="column">
-                                                            <input type="checkbox" v-model="field.nullable"> nullable
-                                                       </div>
-                                                       <div class="column">
-                                                            <a class="button is-danger" @click="removeFields(i)">X</a>
-                                                       </div>
-                                                  </div>
-                                             </transition-group>
-                                        </draggable>
-                                        <div class="columns">
-                                             <div class="column">
                                                   <div class="field">
                                                        <label class="label">Controller Namespace</label>
                                                        <div class="control">
@@ -115,6 +68,58 @@
                                                   </div>
                                              </div>
                                         </div>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <label class="label">What type do you want to generate
+                                                       <sup style="color:red">*</sup>
+                                                  </label>
+
+                                                  <input type="checkbox" v-model="generate_type" value="web">
+                                                  Web
+                                                  <br>
+                                                  <input type="checkbox" v-model="generate_type" value="api">
+                                                  Api
+                                             </div>
+                                        </div>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <label class="label">Fields (Draggable)<sup style="color:red">*</sup></label>
+                                             </div>
+                                             <div class="column">
+                                                  <div class="field is-right" style="float: right">
+                                                       <a class="button is-link" @click="addMoreFields">Add Field</a>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                        <draggable v-model="fields">
+                                             <transition-group>
+                                                  <div v-for="(field, i) in fields" :key="i">
+                                                       <div class="columns">
+                                                            <div class="column">
+                                                                 <input class="input" type="text" v-model="field.name" placeholder="Field Name" required>
+                                                            </div>
+                                                            <div class="column">
+                                                                 <div class="select is-primary">
+                                                                      <select v-model="field.type">
+                                                                           <option :value="type" v-for="type in types">
+                                                                                @{{ type }}
+                                                                           </option>
+                                                                      </select>
+                                                                 </div>
+                                                            </div>
+                                                            <div class="column">
+                                                                 <input class="input" type="text" v-model="field.validation" placeholder="eg: required|min:10">
+                                                            </div>
+                                                            <div class="column">
+                                                                 <input type="checkbox" v-model="field.nullable"> nullable
+                                                            </div>
+                                                            <div class="column">
+                                                                 <a class="button is-danger" @click="removeFields(i)">X</a>
+                                                            </div>
+                                                       </div>
+                                                  </div>
+                                             </transition-group>
+                                        </draggable>
                                         <div class="columns">
                                              <div class="column">
                                                   <div class="field">
@@ -182,7 +187,8 @@
                     'boolean',
                     'decimal',
                     'double',
-                    'float'
+                    'float',
+                    'file'
                ],
 
                model: '',
@@ -190,7 +196,8 @@
                fields: [{
                     name: '',
                     type: 'string',
-                    nullable: false
+                    nullable: false,
+                    validation: ''
                }],
                controller_namespace: '',
                model_namespace: '',
@@ -202,7 +209,8 @@
                     this.fields.push({
                          name: '',
                          type: 'string',
-                         nullable: false
+                         nullable: false,
+                         validation: ''
                     })
                },
                removeFields(i) {
@@ -213,7 +221,8 @@
                     this.fields = [{
                          name: '',
                          type: 'string',
-                         nullable: false
+                         nullable: false,
+                         validation: ''
                     }]
                     this.controller_namespace = ''
                     this.model_namespace = ''
