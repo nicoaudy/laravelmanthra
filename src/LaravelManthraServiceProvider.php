@@ -69,6 +69,13 @@ class LaravelManthraServiceProvider extends ServiceProvider
             __DIR__ . '/ApiController.php' => app_path('Http/Controllers/ApiController.php'),
         ], 'laravel-manthra ApiController');
 
+        $this->publishes([
+            __DIR__ . '/../assets/toastr.min.css' => public_path('vendor/manthra/css/toastr.min.css'),
+            __DIR__ . '/../assets/jquery.min.js' => public_path('vendor/manthra/js/jquery.min.js'),
+            __DIR__ . '/../assets/toastr.min.js' => public_path('vendor/manthra/js/toastr.min.js'),
+            __DIR__ . '/../resources/views/include/flash_message.blade.php' => base_path('resources/views/vendor/manthra/flash_message.blade.php'),
+        ]);
+
         $this->commands([
             'NicoAudy\LaravelManthra\Commands\GenerateCrudCommand',
             'NicoAudy\LaravelManthra\Commands\GenerateApiCommand',

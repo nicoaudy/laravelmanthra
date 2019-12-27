@@ -2,6 +2,12 @@
 
 return [
 
+    /**
+     * Clear the toastr message
+     * prams in seconds
+     */
+    'clear_message' => null,
+
     'custom_template' => false,
 
     /*
@@ -51,47 +57,47 @@ return [
     //'custom_delimiter' => ['#!', '!#'],
     'dynamic_view_template' => [
         'index' => [
-        	'formHeadingHtml', 
-        	'formBodyHtml', 
-        	'crudName', 
-        	'crudNameCap', 
-        	'modelName', 
-        	'viewName', 
-        	'routeGroup', 
-        	'primaryKey'
+            'formHeadingHtml',
+            'formBodyHtml',
+            'crudName',
+            'crudNameCap',
+            'modelName',
+            'viewName',
+            'routeGroup',
+            'primaryKey'
         ],
         'form' => ['formFieldsHtml'],
         'create' => [
-        	'crudName', 
-        	'crudNameCap', 
-        	'modelName', 
-        	'modelNameCap', 
-        	'viewName', 
-        	'routeGroup', 
-        	'viewTemplateDir'
+            'crudName',
+            'crudNameCap',
+            'modelName',
+            'modelNameCap',
+            'viewName',
+            'routeGroup',
+            'viewTemplateDir'
         ],
         'edit' => [
-        	'crudName', 
-        	'crudNameSingular', 
-        	'crudNameCap', 
-        	'modelNameCap', 
-        	'modelName', 
-        	'viewName', 
-        	'routeGroup', 
-        	'primaryKey', 
-        	'viewTemplateDir'
+            'crudName',
+            'crudNameSingular',
+            'crudNameCap',
+            'modelNameCap',
+            'modelName',
+            'viewName',
+            'routeGroup',
+            'primaryKey',
+            'viewTemplateDir'
         ],
         'show' => [
-        	'formHeadingHtml', 
-        	'formBodyHtml', 
-        	'formBodyHtmlForShowView', 
-        	'crudName', 
-        	'crudNameSingular', 
-        	'crudNameCap', 
-        	'modelName', 
-        	'viewName', 
-        	'routeGroup', 
-        	'primaryKey'
+            'formHeadingHtml',
+            'formBodyHtml',
+            'formBodyHtmlForShowView',
+            'crudName',
+            'crudNameSingular',
+            'crudNameCap',
+            'modelName',
+            'viewName',
+            'routeGroup',
+            'primaryKey'
         ],
 
         /*
