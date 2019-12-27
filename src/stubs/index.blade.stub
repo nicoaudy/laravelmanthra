@@ -24,7 +24,7 @@
                         {!! Form::close() !!}
 
                         <div class="table-responsive py-4">
-                            <table class="table table-borderless">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>ID</th>%%formHeadingHtml%%<th>Actions</th>
