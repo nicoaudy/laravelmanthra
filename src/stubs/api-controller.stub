@@ -4,8 +4,8 @@ namespace DummyNamespace;
 
 use DummyRootNamespaceHttp\Controllers\ApiController;
 
-use DummyRootNamespace{{modelNamespace}}{{modelName}};
 use Illuminate\Http\Request;
+use DummyRootNamespace{{modelNamespace}}{{modelName}};
 
 class DummyClass extends ApiController
 {
@@ -69,11 +69,10 @@ class DummyClass extends ApiController
         $requestData = $request->all();
         {{fileSnippet}}
         ${{crudNameSingular}} = {{modelName}}::find($id);
-        
-        if(!${{crudNameSingular}}) return $this->respondNotFound();
-        
-        ${{crudNameSingular}}->update($requestData);
 
+        if(!${{crudNameSingular}}) return $this->respondNotFound();
+
+        ${{crudNameSingular}}->update($requestData);
         return $this->makeResponse(null, 'data has been updated successfuly');
     }
 
@@ -88,9 +87,8 @@ class DummyClass extends ApiController
     {
         ${{crudNameSingular}} = {{modelName}}::find($id);
         if(!${{crudNameSingular}}) return $this->respondNotFound();
-        
+
         ${{crudNameSingular}}->delete();
-        
         return $this->makeResponse(null, 'data has been deleted successfuly');
     }
 }
