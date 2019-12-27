@@ -64,3 +64,7 @@
         </div>
     </div>
 @endsection
+
+@section('javascripts')
+    @include("vendor/manthra/flash_message.blade.php")
+@endsection
