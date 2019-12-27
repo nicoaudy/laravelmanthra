@@ -2,6 +2,6 @@
     {!! Form::label('%1$s', %2$s, ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         %3$s
-        {!! $errors->first('%1$s', '<p class="help-block">:message</p>') !!}
+        {!! $errors->first('%1$s', '<div class="invalid-feedback d-block">:message</div>') !!}
     </div>
 </div>
