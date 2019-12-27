@@ -17,13 +17,6 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                            <ul class="alert alert-danger">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
 
                         {!! Form::model($%%crudNameSingular%%, [
                             'method' => 'PATCH',
