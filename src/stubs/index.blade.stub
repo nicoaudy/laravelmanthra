@@ -17,7 +17,7 @@
                             <input type="text" class="form-control" name="search" placeholder="Search...">
                             <span class="input-group-append">
                                 <button class="btn btn-dark" type="submit">
-                                    <i class="fa fa-search"></i>
+                                    Search
                                 </button>
                             </span>
                         </div>
@@ -27,13 +27,13 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>%%formHeadingHtml%%<th>Actions</th>
+                                        <th>#</th>%%formHeadingHtml%%<th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($%%crudName%% as $item)
+                                @forelse($%%crudName%% as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         %%formBodyHtml%%
                                         <td>
                                             <a href="{{ url('/%%routeGroup%%%%viewName%%/' . $item->%%primaryKey%%) }}" title="View %%modelName%%"><button class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
@@ -52,7 +52,13 @@
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="{{ config('laravelmanthra.view_columns_number') + 2 }}">
+                                            Data not found, <a href="{{ url('/%%routeGroup%%%%viewName%%/create') }}"> create new </a>
+                                        </td>
+                                    </tr>
+                                @endforelse
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $%%crudName%%->appends(['search' => Request::get('search')])->render() !!} </div>
