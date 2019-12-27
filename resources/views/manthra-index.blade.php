@@ -101,13 +101,7 @@
                                                                  <input class="input" type="text" v-model="field.name" placeholder="Field Name" required>
                                                             </div>
                                                             <div class="column">
-                                                                 <div class="select is-primary">
-                                                                      <select v-model="field.type">
-                                                                           <option :value="type" v-for="type in types">
-                                                                                @{{ type }}
-                                                                           </option>
-                                                                      </select>
-                                                                 </div>
+                                                                 <v-select v-model="field.type" :options="types"></v-select>
                                                             </div>
                                                             <div class="column">
                                                                  <input class="input" type="text" v-model="field.validation" placeholder="eg: required|min:10">
@@ -156,6 +150,8 @@
      Vue.config.devtools = true
      Vue.use(Toasted)
      Vue.use(vuedraggable)
+     Vue.component('v-select', VueSelect.VueSelect);
+
      new Vue({
           el: '#manthra',
           mounted() {
