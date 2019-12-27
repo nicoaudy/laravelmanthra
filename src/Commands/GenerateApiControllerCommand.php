@@ -120,15 +120,14 @@ class GenerateApiControllerCommand extends GeneratorCommand
 
         $snippet = <<<EOD
         if (\$request->hasFile('{{fieldName}}')) {
-            foreach(\$request['{{fieldName}}'] as \$file){
-                \$uploadPath = public_path('/uploads/{{fieldName}}');
+            \${{fieldName}} = \$request->{{fieldName}};
+            \$uploadPath = public_path('/uploads/{{fieldName}}');
 
-                \$extension = \$file->getClientOriginalExtension();
-                \$fileName = rand(11111, 99999) . '.' . \$extension;
+            \$extension = \${{fieldName}}->getClientOriginalExtension();
+            \$fileName = rand(11111, 99999) . '.' . \$extension;
 
-                \$file->move(\$uploadPath, \$fileName);
-                \$requestData['{{fieldName}}'] = \$fileName;
-            }
+            \${{fieldName}}->move(\$uploadPath, \$fileName);
+            \$requestData['{{fieldName}}'] = \$fileName;
         }
 EOD;
 
