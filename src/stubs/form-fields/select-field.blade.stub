@@ -1,1 +1,1 @@
-{!! Form::select('%%itemName%%', %%options%%, null, ['class' => 'form-control'%%required%%]) !!}
+{!! Form::select('%%itemName%%', %%options%%, null, ['class' => ($errors->has('%1$s')) ? 'form-control is-invalid' : 'form-control'%%required%%]) !!}
