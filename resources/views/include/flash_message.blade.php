@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('vendor/manthra/css/toastr.min.css') }}">
+<script src="{{ asset('vendor/manthra/js/toastr.min.js') }}"></script>
 <script>
   @if(Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}";

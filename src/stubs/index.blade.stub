@@ -63,8 +63,7 @@
             </div>
         </div>
     </div>
+
+    @include('manthra::include.flash_message')
 @endsection
 
-@section('javascripts')
-    @include("vendor/manthra/flash_message.blade.php")
-@endsection
