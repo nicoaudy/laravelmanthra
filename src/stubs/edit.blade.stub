@@ -29,7 +29,8 @@
                             'method' => 'PATCH',
                             'url' => ['/%%routeGroup%%%%viewName%%', $%%crudNameSingular%%->%%primaryKey%%],
                             'class' => 'form-horizontal',
-                            'files' => true
+                            'files' => true,
+                            'onsubmit' => "submitButton.disabled = true"
                         ]) !!}
 
                         @include ('%%viewTemplateDir%%.form', ['submitButtonText' => 'Update'])
