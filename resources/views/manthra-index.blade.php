@@ -49,8 +49,6 @@
                                                        </div>
                                                   </div>
                                              </div>
-                                        </div>
-                                        <div class="columns">
                                              <div class="column">
                                                   <div class="field">
                                                        <label class="label">View Path</label>
@@ -69,18 +67,22 @@
                                                        </div>
                                                   </div>
                                              </div>
-                                        </div>
-                                        <div class="columns">
                                              <div class="column">
                                                   <label class="label">What type do you want to generate
                                                        <sup style="color:red">*</sup>
                                                   </label>
-
                                                   <input type="checkbox" v-model="generate_type" value="web">
                                                   Web
                                                   <br>
                                                   <input type="checkbox" v-model="generate_type" value="api">
                                                   Api
+                                             </div>
+                                        </div>
+                                        <div class="columns">
+                                             <div class="column">
+                                                  <label class="label">Run migration after generate</label>
+                                                  <input type="checkbox" v-model="migration" value="true">
+                                                  Yes
                                              </div>
                                         </div>
                                         <div class="columns">
@@ -201,6 +203,7 @@
                model_namespace: '',
                view_path: '',
                route_group: '',
+               migration: false
           },
           methods: {
                addMoreFields() {
@@ -226,6 +229,7 @@
                     this.model_namespace = ''
                     this.view_path = ''
                     this.route_group = ''
+                    this.migration = false
                },
                async handleSubmit() {
                     this.loading = true
@@ -245,6 +249,7 @@
                          data['view_path'] = this.view_path
                          data['route_group'] = this.route_group
                          data['generate_type'] = this.generate_type
+                         data['migration'] = this.migration
 
                          const response = await axios.post('/manthra', data)
                          const result = await response
