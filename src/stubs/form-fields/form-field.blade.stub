@@ -1,1 +1,1 @@
-{!! Form::%%fieldType%%('%%itemName%%', null, ['class' => ($errors->has('%1$s')) ? 'form-control is-invalid' : 'form-control'%%required%%]) !!}
+{!! Form::%%fieldType%%('%%itemName%%', null, ['class' => ($errors->has('%%itemName%%')) ? 'form-control is-invalid' : 'form-control'%%required%%]) !!}
