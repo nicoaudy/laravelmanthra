@@ -4,8 +4,6 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
-
 ![screenshot.png](screenshot.png)
 
 ## Installation
