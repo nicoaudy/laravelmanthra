@@ -9,10 +9,8 @@
                     <div class="card-header">
                         Edit %%modelName%% #{{ $%%crudNameSingular%%->%%primaryKey%% }}
                         <div class="text-right">
-                            <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" title="Back">
-                                <button class="btn btn-warning">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
-                                </button>
+                            <a href="{{ url('/%%routeGroup%%%%viewName%%') }}" class="btn btn-warning">
+                                Back
                             </a>
                         </div>
                     </div>
