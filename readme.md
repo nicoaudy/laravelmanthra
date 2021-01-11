@@ -5,6 +5,7 @@
 
 
 ![screenshot.png](screenshot.png)
+![manthra.gif](manthra.gif)
 
 ## Installation
 
