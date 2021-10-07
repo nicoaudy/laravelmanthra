@@ -53,7 +53,7 @@ You can modified your `/manthra` to append middleware with forcing default route
 Generate crud scaffold web and api you may use this command, for example :
 
 ```bash
-php artisan manthra:complete Cat --fields="name#string;age#integer; type#select#options=persian,maine coon,bengal" --view-path=pet --controller-namespace=Pet --route-group=pet --model-namespace=Models
+php artisan manthra:complete Cat --fields="name#string;age#integer; type#select#options=persian,maine coon,bengal; is_male#boolean" --view-path=pet --controller-namespace=Pet --route-group=pet --model-namespace=Models
 ```
 
 ### Web 
