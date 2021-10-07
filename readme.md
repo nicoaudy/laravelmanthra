@@ -67,7 +67,7 @@ php artisan manthra:web Cat --fields="name#string;age#integer; type#select#optio
 Generate crud scaffold api only you may use this command, the difference between web and api just `(--view-path=)` flag, for example :
 
 ```bash
-php artisan manthra:api Cat --fields="name#string;age#integer; type#select#options=persian,maine coon,bengal" --controller-namespace=Pet --route-group=pet --model-namespace=Models
+php artisan manthra:api Cat --fields="name#string;age#integer; type#select#options=persian,maine coon,bengal; is_male#boolean" --controller-namespace=Pet --route-group=pet --model-namespace=Models
 ```
 
 ---
